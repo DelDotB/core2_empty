@@ -1,0 +1,68 @@
+﻿@page "{id:int}"
+
+@model MyRazorPage
+
+@using Microsoft.AspNetCore.Mvc.RazorPages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@functions {
+
+public class MyRazorPage : PageModel
+{
+	public string Message { get; set; } = "In page model: ";
+	public int Id { get; set; }
+	public void OnGet(int id)
+	{
+		Message += "This is a message.";
+		Id = id;
+	}
+}
+
+}
+
+@{
+	Layout = null;
+	var dateTime = DateTime.Now;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>myrazorpage</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+</head>
+<body>
+	This is the ID: @Model.Id <br />
+	Time: @dateTime <br />
+	This is the message: @Model.Message <br />
+
+	<h1>HTML Helpers</h1>
+	@using (Html.BeginForm())
+	{
+		@Html.Label("Name: ")
+		@Html.TextBoxFor(m => m.Id, new { @class = "text-danger" })<br />
+		@Html.Label("Message: ")
+		@Html.TextBoxFor(m => m.Message)<br />
+		<button type="submit" value="submit">Submit</button>
+
+	}
+
+	<h1>Tag Helpers</h1>
+	<a asp-action="Index" asp-controller="Home">Go to homepage</a><br />
+	<form asp-action="Index" asp-controller="Home" method="post">
+		<input type="text" asp-for="Id" /><br />
+		<input type="text" asp-for="Message" /><br />
+		<div class="form-group">
+			<label asp-for="Message"></label>
+			<input asp-for="Message" class="control-label" />
+			<span asp-validation-for="Message" class="text-danger"></span>
+		</div>
+		<div class="form-group">
+			<button type="submit" value="submit">Submit</button>
+		</div>
+	</form>
+
+</body>
+</html>

@@ -18,7 +18,8 @@ namespace core2_empty
 		}
 
 		public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-				WebHost.CreateDefaultBuilder(args)
+				WebHost.CreateDefaultBuilder(args)  
+			//.ConfigureAppConfiguration((context, builder) => builder.AddJsonFile("appsettings.json"))
 						.UseStartup<Startup>();
 	}
 }
